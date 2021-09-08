@@ -1,7 +1,17 @@
-import boto3
 import json
+import datetime
 
-ec2 = boto3.client('ec2')
 def lambda_handler(event, context):
-    response = ec2.describe_availability_zones()
-    return {"statusCode": 200, "body": json.dumps(response)}
+
+    curr_time = datetime.datetime.now()
+    time_str = curr_time.strftime("%Y-%m-%d")
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps(
+            {
+                "time": time_str,
+                # "location": ip.text.replace("\n", "")
+            }
+        )
+    }
